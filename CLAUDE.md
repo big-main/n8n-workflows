@@ -441,6 +441,36 @@ bash test_security.sh
 
 ---
 
+## AI & Agent Platform Integrations
+
+### OpenClaw (v2026.4.14 — April 14, 2026)
+
+[OpenClaw](https://github.com/openclaw/openclaw) is an open-source AI agent orchestration platform relevant to workflows in this collection that route through LLM-powered agents. Key capabilities as of v2026.4.14:
+
+**Model support**
+- Forward-compatible with `gpt-5.4-pro` (Codex pricing tier) — relevant when building workflows that call OpenClaw as an HTTP endpoint or sub-agent
+- Use `httpRequest` nodes to invoke OpenClaw's API; credential references should store API keys, not inline values
+
+**Telegram integration improvements**
+- Human-readable forum topic names now surface in agent context, prompt metadata, and plugin hook metadata via Telegram service messages
+- Affects workflows in `workflows/Telegram/` that route messages through an OpenClaw agent — topic context is now available as a named field rather than a raw ID
+
+**Security changes to be aware of (v2026.4.14)**
+- **Slack `allowFrom`** — global channel allowlist is now enforced on all channel interactions; workflows that post to Slack via OpenClaw must ensure the n8n instance hostname is in the allowlist
+- **Media attachment path resolution** — canonical path failures now fail closed; workflows handling file attachments through OpenClaw should not rely on path fallbacks
+- **Markdown ReDoS** — maliciously crafted markdown can no longer freeze the OpenClaw Control UI; no workflow changes needed, but relevant for any workflow that forwards user-supplied text to the OpenClaw UI
+- **Browser SSRF** — hostname navigation restored under default policy; strict mode remains available and should be used in production deployments
+
+**Common n8n → OpenClaw workflow pattern**
+```
+Trigger → Prepare Payload (Set) → HTTP Request (OpenClaw API) → Parse Response (Code/Set) → Output
+```
+- Authenticate via `Authorization: Bearer` header stored as an n8n credential
+- Use `respondToWebhook` if OpenClaw is calling n8n back as a plugin hook
+- Telegram forum topic name is now available at `$json.topic_name` in OpenClaw webhook payloads
+
+---
+
 ## medcards-ai Sub-project
 
 The `medcards-ai/` directory contains an independent **Next.js application** for medical education (flashcard-style learning powered by AI). It uses:
@@ -502,6 +532,7 @@ To work on this sub-project, `cd medcards-ai/` and run `npm install` first. It h
 - **Python:** 3.9+ required for backend
 - **Node.js:** Required for `src/*.js` scripts and `medcards-ai/`
 - **Last major update:** November 2025 (security audit, Docker multi-platform, GitHub Pages)
+- **OpenClaw:** v2026.4.14 (April 2026) — `gpt-5.4-pro` support, Telegram forum topic names in agent context, Slack `allowFrom` enforcement, media path fail-closed, ReDoS fix
 
 ---
 
