@@ -23,7 +23,7 @@ Live interface: `zie619.github.io/n8n-workflows`
 
 ```
 n8n-workflows/
-├── workflows/                  # 2,061 n8n workflow JSON files
+├── workflows/                  # 2,061 n8n workflow JSON files (188 subdirectories)
 │   ├── Activecampaign/         # Email marketing integrations
 │   ├── Airtable/               # Airtable database workflows
 │   ├── Code/                   # 183 code-node-heavy workflows
@@ -36,11 +36,11 @@ n8n-workflows/
 │   ├── Splitout/               # 194 data-splitting workflows
 │   ├── Telegram/               # 119 Telegram bot workflows
 │   ├── Wait/                   # 104 wait/delay workflows
-│   └── [180+ other integration directories...]
+│   └── [176+ other integration directories...]
 │
-├── src/                        # Backend JavaScript/Python source
+├── src/                        # Backend source modules
 │   ├── server.js               # Express server entry point
-│   ├── database.js             # Database abstraction layer
+│   ├── database.js             # Database abstraction layer (Node.js)
 │   ├── index-workflows.js      # Workflow indexing logic
 │   ├── init-db.js              # Database initialization
 │   ├── analytics_engine.py     # Usage analytics
@@ -52,43 +52,78 @@ n8n-workflows/
 │   └── user_management.py      # User/auth management
 │
 ├── docs/                       # GitHub Pages static site
-│   ├── api/                    # API documentation
-│   ├── css/                    # Stylesheets
+│   ├── index.html              # Main documentation page
+│   ├── 404.html                # Error page
+│   ├── _config.yml             # Jekyll configuration
+│   ├── api/                    # Pre-built API data files
+│   │   ├── search-index.json   # Full-text search index (2.2 MB)
+│   │   ├── categories.json     # Category list
+│   │   ├── integrations.json   # Integration metadata
+│   │   ├── metadata.json       # Site metadata
+│   │   └── stats.json          # Repository statistics
+│   ├── css/styles.css          # Main stylesheet
 │   └── js/                     # Frontend JavaScript
+│       ├── app.js              # Application logic
+│       └── search.js           # Search implementation
 │
 ├── scripts/                    # Utility and deployment scripts
 │   ├── deploy.sh               # Deployment automation
 │   ├── backup.sh               # Database backup
 │   ├── health-check.sh         # Health monitoring
-│   ├── generate_search_index.py # Search index generator
+│   ├── generate_search_index.py # Builds docs/api/search-index.json
+│   ├── update_github_pages.py  # Updates GitHub Pages documentation
 │   └── update_readme_stats.py  # Dynamic README stats updater
 │
 ├── context/                    # Search/categorization metadata
-│   ├── def_categories.json     # Category definitions
+│   ├── def_categories.json     # Category definitions (725 lines)
 │   ├── unique_categories.json  # Deduplicated category list
-│   └── search_categories.json  # Search-optimized categories
+│   └── search_categories.json  # Search-optimized categories (8,229 lines)
 │
 ├── k8s/                        # Kubernetes manifests
-│   ├── namespace.yaml
-│   ├── deployment.yaml
-│   ├── service.yaml
-│   ├── ingress.yaml
-│   └── configmap.yaml
+│   ├── namespace.yaml          # Isolated n8n namespace
+│   ├── deployment.yaml         # StatefulSet configuration
+│   ├── service.yaml            # LoadBalancer service
+│   ├── ingress.yaml            # Ingress routing
+│   └── configmap.yaml          # Configuration management
 │
 ├── helm/                       # Helm chart for k8s deployment
 │   └── workflows-docs/
-│       ├── Chart.yaml
-│       ├── values.yaml
-│       └── templates/
+│       ├── Chart.yaml          # Chart metadata
+│       ├── values.yaml         # Configurable default values
+│       └── templates/          # Deployment templates + helpers
 │
 ├── medcards-ai/                # Sub-project: medical education app
-│   ├── src/                    # Next.js source
+│   ├── src/types/database.ts   # TypeScript database type definitions
 │   ├── supabase/               # Supabase migrations/config
+│   │   ├── schema.sql          # Core database schema
+│   │   ├── schema-network-effects.sql
+│   │   └── seed-cases.sql
 │   ├── prompts/                # LLM prompt templates
-│   ├── package.json
+│   │   ├── coach-prompt.md
+│   │   ├── feedback-prompt.md
+│   │   └── tutor-prompt.md
+│   ├── package.json            # Next.js 15.1.4, React 19, Anthropic SDK 0.30.1
 │   ├── tsconfig.json
 │   ├── next.config.ts
+│   ├── tailwind.config.ts
+│   ├── README.md
+│   ├── EXECUTIVE_SUMMARY.md
+│   ├── PRODUCT_STRATEGY.md
+│   └── SCALABILITY_ARCHITECTURE.md
+│
+├── templates/                  # Reusable n8n workflow templates
+│   ├── communication/
+│   │   ├── telegram-ai-bot-template.json
+│   │   └── telegram-ai-bot-template.md
+│   ├── data-processing/
+│   │   └── google-sheets-automation-template.json
 │   └── README.md
+│
+├── static/                     # Static HTML interfaces
+│   ├── index.html              # Main web interface
+│   ├── index-nodejs.html       # Node.js variant interface
+│   ├── mobile-interface.html   # Mobile-optimized UI
+│   └── mobile-app.html         # Mobile app version
 │
 ├── .devcontainer/              # Dev container configuration
 │   ├── devcontainer.json
@@ -96,17 +131,23 @@ n8n-workflows/
 │   └── init-firewall.sh
 │
 ├── .github/                    # GitHub Actions CI/CD
-├── static/                     # Static web assets (CSS, JS, images)
-├── templates/                  # HTML templates
+│   ├── ci-cd.yml               # Main CI/CD pipeline
+│   ├── docker.yml              # Docker build and push
+│   ├── deploy-pages.yml        # GitHub Pages deployment
+│   ├── pages-deploy.yml        # Pages deployment (alternate)
+│   └── update-readme.yml       # README auto-update
+│
+├── .playwright-mcp/            # Playwright automation support
 │
 ├── api_server.py               # FastAPI application (main backend)
 ├── workflow_db.py              # SQLite FTS5 database manager
-├── run.py                      # Server launcher
-├── requirements.txt            # Python dependencies
+├── run.py                      # Server launcher with dependency checks
+├── requirements.txt            # Python dependencies (23 packages)
 ├── Dockerfile                  # Multi-stage Docker build
-├── docker-compose.yml          # Default production Compose
-├── docker-compose.dev.yml      # Development Compose (hot reload)
-├── docker-compose.prod.yml     # Full production Compose stack
+├── docker-compose.yml          # Production Compose (with Traefik)
+├── docker-compose.dev.yml      # Development Compose (hot reload + Adminer)
+├── docker-compose.prod.yml     # Hardened production stack (+ Prometheus)
+├── run-as-docker-container.sh  # Docker launch helper script
 ├── test_workflows.py           # Workflow JSON validation tests
 ├── test_api.sh                 # API endpoint tests
 ├── test_security.sh            # Security scanning tests
@@ -430,6 +471,50 @@ bash test_security.sh
 
 ---
 
+## Static Interfaces & Templates
+
+### Static HTML Interfaces (`static/`)
+
+Four standalone HTML interfaces for direct browser use (no server required):
+- `index.html` — Primary web interface for browsing workflows
+- `index-nodejs.html` — Node.js-specific variant of the main interface
+- `mobile-interface.html` — Mobile-optimized responsive UI
+- `mobile-app.html` — Mobile app version with native-style interactions
+
+These differ from `docs/` (which is the GitHub Pages documentation site). The `static/` files are self-contained HTML applications.
+
+### Workflow Templates (`templates/`)
+
+Reusable, documented n8n workflow templates for common patterns:
+
+```
+templates/
+├── communication/
+│   ├── telegram-ai-bot-template.json   # Ready-to-import Telegram AI bot
+│   └── telegram-ai-bot-template.md     # Setup documentation
+├── data-processing/
+│   └── google-sheets-automation-template.json
+└── README.md                           # Template usage guide
+```
+
+Templates follow the same JSON structure as `workflows/` files but are designed to be starting points, not production workflows.
+
+---
+
+## CI/CD Pipelines (`.github/`)
+
+Five GitHub Actions workflows:
+
+| File | Purpose |
+|------|---------|
+| `ci-cd.yml` | Main CI/CD pipeline — test, build, deploy |
+| `docker.yml` | Build and push Docker image to registry |
+| `deploy-pages.yml` | Deploy `docs/` to GitHub Pages |
+| `pages-deploy.yml` | Alternate GitHub Pages deployment |
+| `update-readme.yml` | Auto-update README stats via `scripts/update_readme_stats.py` |
+
+---
+
 ## Security Considerations
 
 - **No secrets in workflow files** — credentials reference named configurations stored in n8n, not the JSON files themselves
@@ -444,12 +529,17 @@ bash test_security.sh
 ## medcards-ai Sub-project
 
 The `medcards-ai/` directory contains an independent **Next.js application** for medical education (flashcard-style learning powered by AI). It uses:
-- **Next.js** (TypeScript) frontend
-- **Supabase** for database and authentication
-- **LLM prompts** in `prompts/` for AI-generated content
-- Independent `package.json` and `tsconfig.json`
+- **Next.js 15.1.4** (TypeScript) frontend with **React 19**
+- **Supabase 2.45.7** for database and authentication
+- **Anthropic SDK 0.30.1** for AI-generated content
+- **Radix UI** + **Tailwind CSS** + **Framer Motion** for UI
+- **LLM prompt templates** in `prompts/` (`coach-prompt.md`, `feedback-prompt.md`, `tutor-prompt.md`)
+- Independent `package.json`, `tsconfig.json`, `tailwind.config.ts`, `next.config.ts`
+- Node.js ≥18.0.0, npm ≥9.0.0 required
 
 To work on this sub-project, `cd medcards-ai/` and run `npm install` first. It has its own README, EXECUTIVE_SUMMARY.md, SCALABILITY_ARCHITECTURE.md, and PRODUCT_STRATEGY.md.
+
+Supabase schemas are in `supabase/` (`schema.sql`, `schema-network-effects.sql`, `seed-cases.sql`). TypeScript database types are in `src/types/database.ts`.
 
 ---
 
@@ -501,7 +591,7 @@ To work on this sub-project, `cd medcards-ai/` and run `npm install` first. It h
 - **n8n compatibility:** Workflows support n8n v0.x through v1.x formats
 - **Python:** 3.9+ required for backend
 - **Node.js:** Required for `src/*.js` scripts and `medcards-ai/`
-- **Last major update:** November 2025 (security audit, Docker multi-platform, GitHub Pages)
+- **Last major update:** April 2026 (CLAUDE.md audit, repository structure verification, medcards-ai dependency update)
 
 ---
 
