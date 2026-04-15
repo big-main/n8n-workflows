@@ -1,0 +1,222 @@
+{
+  "id": "2059",
+  "meta": {
+    "instanceId": "workflow-ollama-gemma4",
+    "versionId": "1.0.0",
+    "createdAt": "2026-04-15T00:00:00.000000",
+    "updatedAt": "2026-04-15T00:00:00.000000",
+    "owner": "n8n-user",
+    "license": "MIT",
+    "category": "ai",
+    "status": "active",
+    "priority": "high",
+    "environment": "production"
+  },
+  "name": "Ollama Gemma4 Chat",
+  "tags": [
+    "automation",
+    "n8n",
+    "production-ready",
+    "ollama",
+    "gemma4",
+    "local-llm",
+    "ai"
+  ],
+  "nodes": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [200, 300],
+      "parameters": {},
+      "typeVersion": 1,
+      "notes": "Start the workflow manually. Replace with a Webhook or Schedule trigger for automated use."
+    },
+    {
+      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "name": "Configure Request",
+      "type": "n8n-nodes-base.set",
+      "position": [420, 300],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "model",
+              "value": "gemma3:latest"
+            },
+            {
+              "name": "prompt",
+              "value": "Explain what Ollama is and why running LLMs locally matters."
+            },
+            {
+              "name": "ollama_base_url",
+              "value": "http://localhost:11434"
+            }
+          ],
+          "number": [
+            {
+              "name": "temperature",
+              "value": 0.7
+            }
+          ],
+          "boolean": [
+            {
+              "name": "stream",
+              "value": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "typeVersion": 2,
+      "notes": "Set model name, prompt text, Ollama base URL, and generation options. Change 'gemma3:latest' to 'gemma4' once Ollama publishes the gemma4 tag."
+    },
+    {
+      "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "name": "Call Ollama API",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [640, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.ollama_base_url }}/api/generate",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"model\": \"{{ $json.model }}\",\n  \"prompt\": \"{{ $json.prompt }}\",\n  \"stream\": {{ $json.stream }},\n  \"options\": {\n    \"temperature\": {{ $json.temperature }}\n  }\n}",
+        "options": {
+          "timeout": 120000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "typeVersion": 4.2,
+      "notes": "POST to Ollama's /api/generate endpoint. Ollama must be running locally (default port 11434). Use /api/chat for multi-turn conversation support."
+    },
+    {
+      "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.set",
+      "position": [860, 300],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "response_text",
+              "value": "={{ $json.response }}"
+            },
+            {
+              "name": "model_used",
+              "value": "={{ $json.model }}"
+            },
+            {
+              "name": "total_duration_ms",
+              "value": "={{ Math.round(($json.total_duration || 0) / 1e6) }}"
+            },
+            {
+              "name": "prompt_tokens",
+              "value": "={{ $json.prompt_eval_count || 0 }}"
+            },
+            {
+              "name": "completion_tokens",
+              "value": "={{ $json.eval_count || 0 }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "typeVersion": 2,
+      "notes": "Extracts the generated text and performance metrics from the Ollama API response."
+    },
+    {
+      "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+      "name": "Setup Instructions",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [200, 80],
+      "parameters": {
+        "width": 680,
+        "height": 180,
+        "content": "## Ollama Gemma4 Chat Workflow\n\n**Prerequisites:**\n1. Install Ollama: `curl -fsSL https://ollama.com/install.sh | sh`\n2. Pull the model: `ollama pull gemma3:latest` (update to `gemma4` when released)\n3. Ensure Ollama is running on `http://localhost:11434`\n\n**To use a different model**, update the `model` field in **Configure Request**."
+      },
+      "typeVersion": 1
+    },
+    {
+      "id": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+      "name": "Ollama Chat API Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [640, 80],
+      "parameters": {
+        "width": 360,
+        "height": 180,
+        "content": "## Multi-turn Chat Variant\n\nFor multi-turn conversation, change the URL to `/api/chat` and update the body to:\n```json\n{\n  \"model\": \"gemma3:latest\",\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"...\"}\n  ],\n  \"stream\": false\n}\n```\nThe response field changes from `response` to `message.content`."
+      },
+      "typeVersion": 1
+    },
+    {
+      "id": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+      "name": "Error Handler",
+      "type": "n8n-nodes-base.stopAndError",
+      "position": [640, 500],
+      "parameters": {
+        "message": "={{ 'Ollama API error: ' + ($json.message || $json.error || 'Unknown error. Ensure Ollama is running at ' + $('Configure Request').first().json.ollama_base_url) }}",
+        "options": {}
+      },
+      "typeVersion": 1,
+      "notes": "Handles errors from the Ollama API call. Common causes: Ollama not running, model not pulled, or wrong port."
+    }
+  ],
+  "active": true,
+  "pinData": {},
+  "settings": {
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveManualExecutions": true,
+    "saveDataSuccessExecution": "all",
+    "executionOrder": "v1",
+    "errorWorkflow": null,
+    "timezone": "UTC",
+    "executionTimeout": 180,
+    "maxExecutions": 1000,
+    "retryOnFail": true,
+    "retryCount": 3,
+    "retryDelay": 2000
+  },
+  "versionId": "a1b2c3d4-0000-0000-0000-ollama-gemma4",
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Configure Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configure Request": {
+      "main": [
+        [
+          {
+            "node": "Call Ollama API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Ollama API": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "description": "Chat with a local Ollama instance using the Gemma4 model (or any Ollama-supported model). Sends a prompt via HTTP to the Ollama /api/generate endpoint and returns the generated text along with token usage and latency metrics.",
+  "notes": "Production-ready workflow for local LLM inference with Ollama. Requires Ollama running on the host machine. Defaults to gemma3:latest — update the model name to gemma4 once the tag is published to the Ollama registry. Supports swapping to any Ollama-hosted model by changing the 'model' field."
+}
