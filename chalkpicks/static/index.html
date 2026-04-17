@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChalkPicks — AI-Powered Sports Betting Analysis</title>
+  <meta name="description" content="Professional sports betting analytics. AI-powered picks updated multiple times daily with live player data, sharp money tracking, and ChalkScore™ ratings." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ─────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <span class="brand-dot"></span>
+    <span class="brand-chalk">Chalk</span><span class="brand-picks">Picks</span>
+  </a>
+  <div class="navbar-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#how-it-works" class="nav-link">How It Works</a>
+    <a href="/pricing" class="nav-link">Pricing</a>
+    <a href="/login" class="btn btn-secondary btn-sm">Log In</a>
+    <a href="/login?tab=register" class="btn btn-primary btn-sm">Get Started</a>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container hero-content">
+    <div class="hero-eyebrow">
+      <span class="brand-dot"></span>
+      Live Data · AI Analysis · Updated Every 2 Hours
+    </div>
+    <h1 class="hero-title">
+      The Sharpest Picks<br>
+      <span class="accent">You'll Ever Find</span>
+    </h1>
+    <p class="hero-sub">
+      ChalkPicks fuses real-time player data, sharp money signals, and our proprietary
+      <strong>ChalkScore™</strong> algorithm to surface only the highest-value bets —
+      across NFL, NBA, MLB, NHL, and more.
+    </p>
+    <div class="hero-actions">
+      <a href="/login?tab=register" class="btn btn-primary btn-lg">Start Free — No Card Required</a>
+      <a href="#how-it-works" class="btn btn-secondary btn-lg">See How It Works</a>
+    </div>
+
+    <!-- Live stats bar -->
+    <div class="stats-bar" id="heroStats">
+      <div class="stat-item">
+        <div class="stat-value" id="statWinRate">64.3%</div>
+        <div class="stat-label">Season Win Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statROI">+12.4%</div>
+        <div class="stat-label">Avg ROI / Month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statPicks">—</div>
+        <div class="stat-label">Picks Today</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statGames">—</div>
+        <div class="stat-label">Games Tracked</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statBestBets">—</div>
+        <div class="stat-label">Best Bets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Ticker ──────────────────────────────────────────────────── -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <!-- Duplicated for seamless loop -->
+    <div class="ticker-inner" id="tickerInner"></div>
+    <div class="ticker-inner" id="tickerInner2"></div>
+  </div>
+</div>
+
+<!-- ── Features ───────────────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">What Makes Us Different</span>
+      <h2 class="section-title">Built for Serious Bettors</h2>
+      <p class="section-sub">Everything you need to beat the books, in one platform.</p>
+    </div>
+    <div class="grid-3">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>ChalkScore™ Rating</h3>
+        <p>Our 0–100 composite score weighs line value, recent ATS form, sharp money flow, situational edges, and head-to-head history into a single, actionable number.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Sharp Money Tracker</h3>
+        <p>See where professional bettors are placing their money. When public % diverges from line movement, sharps are acting — and we flag it instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Live Line Movement</h3>
+        <p>Track every spread, moneyline, and total shift as it happens across DraftKings, FanDuel, BetMGM, and more. Spot steam moves before the books catch up.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Real-Time Data Refresh</h3>
+        <p>Picks are rebuilt from live player data, injury reports, and updated lines multiple times per day — 6am, 12pm, 5pm, and every 2 hours automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Best Bet Alerts</h3>
+        <p>When a pick scores 78+ on the ChalkScore™ scale, it's designated a Best Bet. These rare, high-confidence plays are where the real edge lives.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Expected Value Engine</h3>
+        <p>Every pick includes an EV% calculation so you know exactly how much mathematical edge you have on the line — not just a gut feeling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ───────────────────────────────────────────── -->
+<section class="section" id="how-it-works" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">The Process</span>
+      <h2 class="section-title">How ChalkPicks Works</h2>
+    </div>
+    <div class="grid-4">
+      <div style="text-align:center; padding: 24px 16px;">
+        <div style="font-size:2.5rem; margin-bottom:16px;">📡</div>
+        <div style="font-family:var(--font-head); font-size:0.75rem; color:var(--chalk-green); font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;">Step 1</div>
+        <h3 style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin-bottom:8px;">Live Data Ingestion</h3>
+        <p style="color:var(--text-muted); font-size:0.83rem;">We pull odds from every major book plus real-time player stats, injury updates, and weather data.</p>
+      </div>
+      <div style="text-align:center; padding: 24px 16px;">
+        <div style="font-size:2.5rem; margin-bottom:16px;">🧠</div>
+        <div style="font-family:var(--font-head); font-size:0.75rem; color:var(--chalk-green); font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;">Step 2</div>
+        <h3 style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin-bottom:8px;">AI Analysis</h3>
+        <p style="color:var(--text-muted); font-size:0.83rem;">Our engine scores every bet candidate across 5 weighted factors and calculates precise expected value.</p>
+      </div>
+      <div style="text-align:center; padding: 24px 16px;">
+        <div style="font-size:2.5rem; margin-bottom:16px;">🏆</div>
+        <div style="font-family:var(--font-head); font-size:0.75rem; color:var(--chalk-green); font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;">Step 3</div>
+        <h3 style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin-bottom:8px;">Picks Ranked</h3>
+        <p style="color:var(--text-muted); font-size:0.83rem;">Only picks scoring above threshold are published. Best Bets (78+) are highlighted separately.</p>
+      </div>
+      <div style="text-align:center; padding: 24px 16px;">
+        <div style="font-size:2.5rem; margin-bottom:16px;">📲</div>
+        <div style="font-family:var(--font-head); font-size:0.75rem; color:var(--chalk-green); font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;">Step 4</div>
+        <h3 style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin-bottom:8px;">You Cash</h3>
+        <p style="color:var(--text-muted); font-size:0.83rem;">You see the pick, the full breakdown, and the analysis. Place it in seconds. Track your ROI over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Sample Picks ───────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Today's Picks</span>
+      <h2 class="section-title">What's on the Board</h2>
+      <p class="section-sub">Live picks refreshed from real data. Free users see 3 picks. Upgrade for full access.</p>
+    </div>
+    <div class="picks-grid" id="landingPicks">
+      <!-- Skeleton loaders -->
+      <div class="card" style="height:320px;"><div class="skeleton" style="width:100%;height:100%;border-radius:var(--radius-lg);"></div></div>
+      <div class="card" style="height:320px;"><div class="skeleton" style="width:100%;height:100%;border-radius:var(--radius-lg);"></div></div>
+      <div class="card" style="height:320px;"><div class="skeleton" style="width:100%;height:100%;border-radius:var(--radius-lg);"></div></div>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="/login?tab=register" class="btn btn-primary btn-lg">See All Picks Free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Social proof ───────────────────────────────────────────── -->
+<section class="section" style="background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Results</span>
+      <h2 class="section-title">Verified Performance</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:3rem; font-family:var(--font-head); font-weight:800; color:var(--chalk-green);">64.3%</div>
+        <div style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin:8px 0 4px;">Overall Win Rate</div>
+        <div style="color:var(--text-muted); font-size:0.83rem;">Across all graded picks this season</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:3rem; font-family:var(--font-head); font-weight:800; color:var(--chalk-green);">71.2%</div>
+        <div style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin:8px 0 4px;">Best Bet Win Rate</div>
+        <div style="color:var(--text-muted); font-size:0.83rem;">Picks rated 78+ ChalkScore™</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:3rem; font-family:var(--font-head); font-weight:800; color:var(--chalk-green);">+12.4%</div>
+        <div style="font-family:var(--font-head); font-size:1rem; font-weight:700; margin:8px 0 4px;">Monthly ROI</div>
+        <div style="color:var(--text-muted); font-size:0.83rem;">At 1 unit flat-bet per pick</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────────────── -->
+<section class="section" style="text-align:center;">
+  <div class="container" style="max-width:640px;">
+    <h2 class="section-title" style="margin-bottom:16px;">Ready to Beat the Books?</h2>
+    <p style="color:var(--text-muted); margin-bottom:32px;">Join thousands of bettors using ChalkPicks to find edge. Start free — no credit card required.</p>
+    <a href="/login?tab=register" class="btn btn-primary btn-lg" style="margin-right:12px;">Create Free Account</a>
+    <a href="/pricing" class="btn btn-secondary btn-lg">See Pricing</a>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="navbar-brand" style="position:static;">
+          <span class="brand-dot"></span>
+          <span class="brand-chalk">Chalk</span><span class="brand-picks">Picks</span>
+        </div>
+        <p>Professional sports betting analytics powered by real-time data and AI.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/app">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="/login">Log In</a>
+        <a href="/login?tab=register">Sign Up</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Responsible Gambling</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ChalkPicks. All rights reserved.</span>
+      <p class="disclaimer">⚠️ ChalkPicks is for informational and entertainment purposes only. Sports betting involves financial risk. Please gamble responsibly. Must be 21+ and in a jurisdiction where sports betting is legal.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Toast container ───────────────────────────────────────── -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/picks.js"></script>
+<script>
+  // Load hero stats
+  fetch('/api/stats').then(r => r.json()).then(d => {
+    document.getElementById('statWinRate').textContent  = d.win_rate + '%';
+    document.getElementById('statROI').textContent      = '+' + d.roi + '%';
+    document.getElementById('statPicks').textContent    = d.total_picks;
+    document.getElementById('statGames').textContent    = d.total_games;
+    document.getElementById('statBestBets').textContent = d.best_bets;
+  }).catch(() => {});
+
+  // Load landing picks (first 3)
+  fetch('/api/picks?limit=3').then(r => r.json()).then(d => {
+    const grid = document.getElementById('landingPicks');
+    if (!d.picks || !d.picks.length) return;
+    grid.innerHTML = '';
+    d.picks.slice(0, 3).forEach(p => {
+      grid.appendChild(buildPickCard(p));
+    });
+  }).catch(() => {});
+
+  // Build ticker
+  fetch('/api/picks?limit=12').then(r => r.json()).then(d => {
+    if (!d.picks) return;
+    const items = d.picks.filter(p => !p.is_locked).map(p => {
+      const typeLabel = {'spread':'Spread','moneyline':'ML','total_over':'Over','total_under':'Under'}[p.pick_type] || p.pick_type;
+      const val = p.pick_value != null ? (p.pick_value > 0 ? '+'+p.pick_value : p.pick_value) : '';
+      return `<div class="ticker-item">
+        <span>${p.away_team} @ ${p.home_team}</span>
+        <span class="pick-badge">${p.pick_team} ${val} (${typeLabel})</span>
+        <span class="score">⬆ ${p.chalk_score}</span>
+        <span class="ticker-sep">|</span>
+      </div>`;
+    }).join('');
+    document.getElementById('tickerInner').innerHTML  = items;
+    document.getElementById('tickerInner2').innerHTML = items;
+  }).catch(() => {});
+</script>
+</body>
+</html>

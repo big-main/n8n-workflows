@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — ChalkPicks</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <span class="brand-dot"></span>
+    <span class="brand-chalk">Chalk</span><span class="brand-picks">Picks</span>
+  </a>
+  <div class="navbar-links">
+    <a href="/#features" class="nav-link">Features</a>
+    <a href="/login" class="btn btn-secondary btn-sm">Log In</a>
+    <a href="/login?tab=register" class="btn btn-primary btn-sm">Get Started</a>
+  </div>
+</nav>
+
+<section class="section" style="padding-top:120px; text-align:center;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Pricing</span>
+      <h1 class="section-title">Simple, Transparent Pricing</h1>
+      <p class="section-sub">Start free. Upgrade when you're ready to go all-in.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pricing-name">Chalk Free</div>
+        <div class="pricing-price">
+          <span class="price-amount">$0</span>
+          <span class="price-period">/ mo</span>
+        </div>
+        <p class="pricing-desc">Great for trying ChalkPicks with no commitment.</p>
+        <ul class="pricing-features">
+          <li>3 picks per day</li>
+          <li>ChalkScore™ ratings visible</li>
+          <li>Basic matchup data</li>
+          <li>Public win-rate stats</li>
+        </ul>
+        <a href="/login?tab=register" class="btn btn-secondary btn-full">Start Free</a>
+      </div>
+
+      <!-- Pro (popular) -->
+      <div class="pricing-card popular">
+        <div class="pricing-popular-badge">MOST POPULAR</div>
+        <div class="pricing-name">Chalk Pro</div>
+        <div class="pricing-price">
+          <span class="price-amount">$19</span>
+          <span class="price-period">.99 / mo</span>
+        </div>
+        <p class="pricing-desc">Full access for serious recreational bettors.</p>
+        <ul class="pricing-features">
+          <li>Unlimited picks — all sports</li>
+          <li>Full ChalkScore™ breakdown</li>
+          <li>Complete pick analysis</li>
+          <li>Line movement charts</li>
+          <li>Sharp money tracker</li>
+          <li>Expected Value (EV%) data</li>
+          <li>Email pick alerts</li>
+        </ul>
+        <button class="btn btn-primary btn-full" onclick="handleUpgrade('pro')">Get Chalk Pro →</button>
+      </div>
+
+      <!-- Sharp -->
+      <div class="pricing-card">
+        <div class="pricing-name">Chalk Sharp</div>
+        <div class="pricing-price">
+          <span class="price-amount">$49</span>
+          <span class="price-period">.99 / mo</span>
+        </div>
+        <p class="pricing-desc">For professional-level bettors chasing maximum edge.</p>
+        <ul class="pricing-features">
+          <li>Everything in Pro</li>
+          <li>Elite AI picks (78+ ChalkScore™)</li>
+          <li>Early-line access</li>
+          <li>ROI tracking dashboard</li>
+          <li>Parlay builder with EV calc</li>
+          <li>Multi-book line comparison</li>
+          <li>Priority support</li>
+          <li>Discord community access</li>
+        </ul>
+        <button class="btn btn-outline btn-full" onclick="handleUpgrade('sharp')">Go Sharp →</button>
+      </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <div style="max-width:640px; margin:72px auto 0; text-align:left;">
+      <h2 style="font-family:var(--font-head); font-size:1.4rem; font-weight:800; margin-bottom:32px; text-align:center;">Frequently Asked Questions</h2>
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <details style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; cursor:pointer;">
+          <summary style="font-family:var(--font-head); font-weight:700; font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            How often are picks updated?
+            <span style="color:var(--chalk-green); font-size:1.2rem;">+</span>
+          </summary>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:12px; line-height:1.6;">
+            Picks are rebuilt from live data at 6am, 12pm, and 5pm UTC daily, plus every 2 hours automatically.
+            Any significant line movement triggers an immediate re-score.
+          </p>
+        </details>
+
+        <details style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; cursor:pointer;">
+          <summary style="font-family:var(--font-head); font-weight:700; font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            Can I cancel anytime?
+            <span style="color:var(--chalk-green); font-size:1.2rem;">+</span>
+          </summary>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:12px; line-height:1.6;">
+            Yes. Cancel any time from your billing portal with one click. Your access continues until the end of your current billing period.
+          </p>
+        </details>
+
+        <details style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; cursor:pointer;">
+          <summary style="font-family:var(--font-head); font-weight:700; font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            What sports are covered?
+            <span style="color:var(--chalk-green); font-size:1.2rem;">+</span>
+          </summary>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:12px; line-height:1.6;">
+            NFL, College Football, NBA, College Basketball, MLB, NHL, and MLS. We add new leagues seasonally.
+          </p>
+        </details>
+
+        <details style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; cursor:pointer;">
+          <summary style="font-family:var(--font-head); font-weight:700; font-size:0.95rem; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            Is this guaranteed to be profitable?
+            <span style="color:var(--chalk-green); font-size:1.2rem;">+</span>
+          </summary>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:12px; line-height:1.6;">
+            No sports betting service can guarantee profits. ChalkPicks provides data-driven analysis to help you
+            find mathematical edges. All betting involves risk. Please gamble responsibly.
+          </p>
+        </details>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <p style="font-size:0.75rem; color:var(--text-dim); max-width:600px; margin:40px auto 0; line-height:1.6;">
+      ⚠️ Sports betting is not available in all jurisdictions. You must be 21+ and comply with all local laws.
+      ChalkPicks does not accept bets and is not a licensed sportsbook. Past performance does not guarantee future results.
+    </p>
+  </div>
+</section>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/auth.js"></script>
+<script>
+  async function handleUpgrade(tier) {
+    const token = Auth.getToken();
+    if (!token) {
+      window.location = '/login?tab=register';
+      return;
+    }
+    try {
+      const res = await fetch(`/api/stripe/checkout/${tier}`, {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + token }
+      });
+      const data = await res.json();
+      if (data.checkout_url) {
+        window.location = data.checkout_url;
+      } else {
+        Toast.show(data.detail || 'Payment unavailable — Stripe not configured yet.', 'error');
+      }
+    } catch {
+      Toast.show('Something went wrong. Please try again.', 'error');
+    }
+  }
+</script>
+</body>
+</html>

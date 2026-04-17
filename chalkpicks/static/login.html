@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — ChalkPicks</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <span class="brand-dot"></span>
+    <span class="brand-chalk">Chalk</span><span class="brand-picks">Picks</span>
+  </a>
+  <div class="navbar-links">
+    <a href="/pricing" class="nav-link">Pricing</a>
+  </div>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-card">
+
+    <!-- Tab switcher -->
+    <div style="display:flex; gap:4px; background:var(--bg-elevated); border-radius:var(--radius-sm); padding:4px; margin-bottom:28px;">
+      <button class="btn btn-sm" id="tabLogin"
+        style="flex:1; border-radius:5px; background:var(--bg-card); color:var(--text);"
+        onclick="switchTab('login')">Log In</button>
+      <button class="btn btn-sm" id="tabRegister"
+        style="flex:1; border-radius:5px; background:transparent; color:var(--text-muted);"
+        onclick="switchTab('register')">Sign Up</button>
+    </div>
+
+    <!-- Login form -->
+    <div id="loginForm">
+      <h1 class="auth-title">Welcome back</h1>
+      <p class="auth-sub">Log in to your ChalkPicks account.</p>
+
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="loginEmail" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="display:flex;justify-content:space-between;">
+            Password <a href="#" style="color:var(--chalk-green);font-size:0.78rem;">Forgot?</a>
+          </label>
+          <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <div class="form-error hidden" id="loginError"></div>
+        <button class="btn btn-primary btn-full" style="margin-top:8px;" type="submit" id="loginBtn">
+          Log In
+        </button>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a href="#" onclick="switchTab('register')">Sign up free</a></p>
+    </div>
+
+    <!-- Register form -->
+    <div id="registerForm" class="hidden">
+      <h1 class="auth-title">Create account</h1>
+      <p class="auth-sub">Start free — no credit card required.</p>
+
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input class="form-input" type="text" id="regUsername" placeholder="sharpbettor" required minlength="3"
+            pattern="[a-zA-Z0-9_]+" autocomplete="username" />
+          <span style="font-size:0.73rem; color:var(--text-dim);">Letters, numbers, and underscores only</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="regEmail" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" id="regPassword" placeholder="8+ characters" required minlength="8" autocomplete="new-password" />
+        </div>
+        <div class="form-error hidden" id="registerError"></div>
+
+        <button class="btn btn-primary btn-full" style="margin-top:8px;" type="submit" id="registerBtn">
+          Create Free Account
+        </button>
+      </form>
+
+      <p style="font-size:0.73rem; color:var(--text-dim); text-align:center; margin-top:14px;">
+        By signing up you agree to our Terms of Service and Privacy Policy.
+      </p>
+      <p class="auth-switch">Already have an account? <a href="#" onclick="switchTab('login')">Log in</a></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/auth.js"></script>
+<script>
+  // Auto-switch tab from URL param
+  const params = new URLSearchParams(location.search);
+  if (params.get('tab') === 'register') switchTab('register');
+
+  function switchTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+    document.getElementById('registerForm').classList.toggle('hidden', isLogin);
+    document.getElementById('tabLogin').style.background    = isLogin ? 'var(--bg-card)' : 'transparent';
+    document.getElementById('tabLogin').style.color         = isLogin ? 'var(--text)' : 'var(--text-muted)';
+    document.getElementById('tabRegister').style.background = !isLogin ? 'var(--bg-card)' : 'transparent';
+    document.getElementById('tabRegister').style.color      = !isLogin ? 'var(--text)' : 'var(--text-muted)';
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginError');
+    err.classList.add('hidden');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    try {
+      await Auth.login(
+        document.getElementById('loginEmail').value,
+        document.getElementById('loginPassword').value
+      );
+      window.location = '/app';
+    } catch (ex) {
+      err.textContent = ex.message || 'Login failed. Check your credentials.';
+      err.classList.remove('hidden');
+      btn.disabled = false; btn.textContent = 'Log In';
+    }
+  }
+
+  async function handleRegister(e) {
+    e.preventDefault();
+    const btn = document.getElementById('registerBtn');
+    const err = document.getElementById('registerError');
+    err.classList.add('hidden');
+    btn.disabled = true; btn.textContent = 'Creating account…';
+    try {
+      await Auth.register(
+        document.getElementById('regEmail').value,
+        document.getElementById('regUsername').value,
+        document.getElementById('regPassword').value
+      );
+      window.location = '/app';
+    } catch (ex) {
+      err.textContent = ex.message || 'Registration failed. Try again.';
+      err.classList.remove('hidden');
+      btn.disabled = false; btn.textContent = 'Create Free Account';
+    }
+  }
+</script>
+</body>
+</html>
