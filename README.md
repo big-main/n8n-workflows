@@ -1,4 +1,4 @@
-# 🚀 n8n Workflow Collection
+# n8n Workflow Collection
 
 <div align="center">
 
@@ -8,43 +8,123 @@
 ![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/zie619)
 
-### 🌟 The Ultimate Collection of n8n Automation Workflows
+### The Ultimate Collection of n8n Automation Workflows
 
-**[🔍 Browse Online](https://zie619.github.io/n8n-workflows)** • **[📚 Documentation](#documentation)** • **[🤝 Contributing](#contributing)** • **[📄 License](#license)**
+**[Browse Online](https://zie619.github.io/n8n-workflows)** · **[Documentation](#documentation)** · **[Contributing](#contributing)** · **[License](#license)**
 
 </div>
 
 ---
 
-## ✨ What's New
+<div align="center">
 
-### 🎉 Latest Updates (November 2025)
-- **🔒 Enhanced Security**: Full security audit completed, all CVEs resolved
-- **🐳 Docker Support**: Multi-platform builds for linux/amd64 and linux/arm64
-- **📊 GitHub Pages**: Live searchable interface at [zie619.github.io/n8n-workflows](https://zie619.github.io/n8n-workflows)
-- **⚡ Performance**: 100x faster search with SQLite FTS5 integration
-- **🎨 Modern UI**: Completely redesigned interface with dark/light mode
+<a href="https://github.com/Trusera/ai-bom">
+  <img src="https://raw.githubusercontent.com/Trusera/ai-bom/main/assets/logo.png" alt="AI-BOM Logo" width="100" />
+</a>
+
+<h2>NEW: Scan Your n8n Workflows for AI Security Risks</h2>
+
+<a href="https://github.com/Trusera/ai-bom">
+  <img src="https://img.shields.io/badge/AI--BOM-Scan%20Now-ff4444?style=for-the-badge&logoColor=white" alt="AI-BOM" />
+</a>
+<a href="https://github.com/Trusera/ai-bom">
+  <img src="https://img.shields.io/badge/Open%20Source-Apache%202.0-blue?style=for-the-badge" alt="Open Source" />
+</a>
+<a href="https://github.com/Trusera/ai-bom">
+  <img src="https://img.shields.io/badge/First%20n8n%20AI%20Scanner-Ever-brightgreen?style=for-the-badge" alt="First Ever" />
+</a>
+
+</div>
+
+<table>
+<tr>
+<td width="65%">
+
+### Your workflows contain AI — do you know what's hiding in them?
+
+We built **[AI-BOM](https://github.com/Trusera/ai-bom)** because we scanned our own 4,343 workflows and found **hardcoded API keys, unauthenticated AI agents, and MCP clients connecting to unknown servers** — all invisible to existing security tools.
+
+**AI-BOM is the first and only tool that scans n8n workflows for AI security risks.**
+
+```bash
+pip install ai-bom
+ai-bom scan ./workflows/
+```
+
+One command finds every AI Agent node, LLM integration, MCP client, hardcoded credential, and dangerous tool combination — then gives you a risk score and a compliance-ready report.
+
+**EU AI Act deadline: August 2025.** You need an AI inventory.
+
+<a href="https://github.com/Trusera/ai-bom"><strong>Get AI-BOM (free & open source) &rarr;</strong></a>
+
+</td>
+<td width="35%" align="center">
+
+<a href="https://github.com/Trusera/ai-bom">
+  <img src="https://raw.githubusercontent.com/Trusera/ai-bom/main/assets/maskot.png" alt="AI-BOM Mascot" width="220" />
+</a>
+
+<br />
+
+<sub><strong>AI-BOM</strong> by <a href="https://trusera.dev">Trusera</a></sub>
+<br />
+<sub>Securing the Agentic Service Mesh</sub>
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><strong>What does AI-BOM detect in n8n workflows? (click to expand)</strong></summary>
+
+<br />
+
+| Risk | Severity | What it finds |
+|------|----------|---------------|
+| **AI Agent nodes** | CRITICAL | Agents connected to LLMs with tool access — can execute code |
+| **Hardcoded credentials** | CRITICAL | API keys in workflow JSON instead of credential store |
+| **Dangerous tool combos** | CRITICAL | Agents with Code Execution + HTTP Request = RCE risk |
+| **MCP clients** | HIGH | Model Context Protocol connections to external servers |
+| **Unauthenticated webhooks** | HIGH | Webhook triggers exposed to the internet without auth |
+| **Agent chains** | HIGH | Execute Workflow linking agents without input validation |
+
+Beyond n8n, AI-BOM also scans **source code** (Python, JS, TS, Java, Go, Rust, Ruby), **Docker configs**, **cloud infrastructure** (Terraform, CloudFormation), and **network endpoints** — 21+ AI SDKs detected across 7 languages.
+
+Output formats: **CycloneDX SBOM** | **SARIF** (GitHub Code Scanning) | **HTML Dashboard** | **Markdown** | **JSON**
+
+</details>
 
 ---
 
-## 🌐 Quick Access
+## What's New
 
-### 🔥 Use Online (No Installation)
+### Latest Updates (November 2025)
+- **Enhanced Security**: Full security audit completed, all CVEs resolved
+- **Docker Support**: Multi-platform builds for linux/amd64 and linux/arm64
+- **GitHub Pages**: Live searchable interface at [zie619.github.io/n8n-workflows](https://zie619.github.io/n8n-workflows)
+- **Performance**: 100x faster search with SQLite FTS5 integration
+- **Modern UI**: Completely redesigned interface with dark/light mode
+
+---
+
+## Quick Access
+
+### Use Online (No Installation)
 Visit **[zie619.github.io/n8n-workflows](https://zie619.github.io/n8n-workflows)** for instant access to:
-- 🔍 **Smart Search** - Find workflows instantly
-- 📂 **15+ Categories** - Browse by use case
-- 📱 **Mobile Ready** - Works on any device
-- ⬇️ **Direct Downloads** - Get workflow JSONs instantly
+- **Smart Search** — Find workflows instantly
+- **15+ Categories** — Browse by use case
+- **Mobile Ready** — Works on any device
+- **Direct Downloads** — Get workflow JSONs instantly
 
 ---
 
-## 🚀 Features
+## Features
 
 <table>
 <tr>
 <td width="50%">
 
-### 📊 By The Numbers
+### By The Numbers
 - **4,343** Production-Ready Workflows
 - **365** Unique Integrations
 - **29,445** Total Nodes
@@ -54,7 +134,7 @@ Visit **[zie619.github.io/n8n-workflows](https://zie619.github.io/n8n-workflows)
 </td>
 <td width="50%">
 
-### ⚡ Performance
+### Performance
 - **< 100ms** Search Response
 - **< 50MB** Memory Usage
 - **700x** Smaller Than v1
@@ -67,7 +147,7 @@ Visit **[zie619.github.io/n8n-workflows](https://zie619.github.io/n8n-workflows)
 
 ---
 
-## 💻 Local Installation
+## Local Installation
 
 ### Prerequisites
 - Python 3.9+
@@ -90,7 +170,7 @@ python run.py
 # http://localhost:8000
 ```
 
-### 🐳 Docker Installation
+### Docker Installation
 ```bash
 # Using Docker Hub
 docker run -p 8000:8000 zie619/n8n-workflows:latest
@@ -102,7 +182,7 @@ docker run -p 8000:8000 n8n-workflows
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 ### API Endpoints
 
@@ -124,7 +204,7 @@ docker run -p 8000:8000 n8n-workflows
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 graph LR
@@ -145,7 +225,7 @@ graph LR
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 n8n-workflows/
@@ -162,16 +242,16 @@ n8n-workflows/
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We love contributions! Here's how you can help:
 
 ### Ways to Contribute
-- 🐛 **Report bugs** via [Issues](https://github.com/Zie619/n8n-workflows/issues)
-- 💡 **Suggest features** in [Discussions](https://github.com/Zie619/n8n-workflows/discussions)
-- 📝 **Improve documentation**
-- 🔧 **Submit workflow fixes**
-- ⭐ **Star the repository**
+- **Report bugs** via [Issues](https://github.com/Zie619/n8n-workflows/issues)
+- **Suggest features** in [Discussions](https://github.com/Zie619/n8n-workflows/discussions)
+- **Improve documentation**
+- **Submit workflow fixes**
+- **Star the repository**
 
 ### Development Setup
 ```bash
@@ -194,39 +274,29 @@ git push origin feature/amazing-feature
 
 ---
 
-## 🔒 Security
+## Security
 
 ### Security Features
-- ✅ **Path traversal protection**
-- ✅ **Input validation & sanitization**
-- ✅ **CORS protection**
-- ✅ **Rate limiting**
-- ✅ **Docker security hardening**
-- ✅ **Non-root container user**
-- ✅ **Regular security scanning**
+- Path traversal protection
+- Input validation & sanitization
+- CORS protection
+- Rate limiting
+- Docker security hardening
+- Non-root container user
+- Regular security scanning
 
 ### Reporting Security Issues
 Please report security vulnerabilities to the maintainers via [Security Advisory](https://github.com/Zie619/n8n-workflows/security/advisories/new).
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
-
-Copyright (c) 2025 Zie619
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
-```
-
 ---
 
-## 💖 Support
+## Support
 
 If you find this project helpful, please consider:
 
@@ -234,13 +304,10 @@ If you find this project helpful, please consider:
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/zie619)
 [![Star on GitHub](https://img.shields.io/badge/Star%20on%20GitHub-181717?style=for-the-badge&logo=github)](https://github.com/Zie619/n8n-workflows)
-[![Follow](https://img.shields.io/badge/Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/zie619)
 
 </div>
 
 ---
-
-## 📊 Stats & Badges
 
 <div align="center">
 
@@ -248,27 +315,26 @@ If you find this project helpful, please consider:
 ![GitHub forks](https://img.shields.io/github/forks/Zie619/n8n-workflows?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/Zie619/n8n-workflows?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/Zie619/n8n-workflows)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Zie619/n8n-workflows)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Zie619/n8n-workflows)
-![GitHub repo size](https://img.shields.io/github/repo-size/Zie619/n8n-workflows)
 
 </div>
 
 ---
 
-## 🙏 Acknowledgments
-
-- **n8n** - For creating an amazing automation platform
-- **Contributors** - Everyone who has helped improve this collection
-- **Community** - For feedback and support
-- **You** - For using and supporting this project!
-
----
-
 <div align="center">
 
-### ⭐ Star us on GitHub — it motivates us a lot!
+**Star us on GitHub — it motivates us a lot!**
 
-Made with ❤️ by [Zie619](https://github.com/Zie619) and [contributors](https://github.com/Zie619/n8n-workflows/graphs/contributors)
+Made with care by [Zie619](https://github.com/Zie619) and [contributors](https://github.com/Zie619/n8n-workflows/graphs/contributors)
+
+<br />
+
+<a href="https://github.com/Trusera/ai-bom">
+  <img src="https://raw.githubusercontent.com/Trusera/ai-bom/main/assets/logo.png" alt="AI-BOM" width="50" />
+</a>
+
+**[AI-BOM](https://github.com/Trusera/ai-bom)** — Discover every AI agent, model, and API hiding in your infrastructure.
+<br />
+Open source by **[Trusera](https://trusera.dev)** — Securing the Agentic Service Mesh.
 
 </div>
